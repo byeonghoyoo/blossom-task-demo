@@ -30,12 +30,6 @@
   .muted{color:var(--sub)}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
 
-  /* ---- login ---- */
-  #login{display:flex;flex-direction:column;justify-content:center;min-height:100vh;padding:28px 24px}
-  .brandwrap{text-align:center;margin-bottom:26px}
-  .bloom{width:64px;height:64px;margin:0 auto 12px;border-radius:20px;
-    background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-size:30px;box-shadow:var(--shadow)}
-  .brandwrap h1{margin:6px 0 2px;font-size:24px;letter-spacing:-.6px}
   .field{margin-bottom:12px}
   .field label{display:block;font-size:12px;color:var(--sub);margin:0 0 6px 4px}
   .field input{width:100%;padding:14px 14px;border:1px solid var(--line);border-radius:14px;font-size:15px;background:#fff}
@@ -121,28 +115,10 @@
 <body>
 <div class="app">
 
-  <!-- ===== LOGIN ===== -->
-  <section id="login" class="screen active">
-    <div class="brandwrap">
-      <div class="bloom">🌸</div>
-      <h1>BLOSSOM&nbsp;TASK</h1>
-      <p class="muted" style="margin:2px 0 0">뷰티블라썸 마케팅팀 테스크 일지</p>
-    </div>
-    <div class="field">
-      <label>아이디</label>
-      <input id="uid" placeholder="marketing@beautyblossom" value="marketing@beautyblossom" />
-    </div>
-    <div class="field">
-      <label>비밀번호</label>
-      <input type="password" placeholder="••••••••" value="demo1234" />
-    </div>
-    <button class="btn" onclick="enterApp()">로그인</button>
-    <p class="demoNote">UI 데모 · 실제 데이터는 저장되지 않습니다</p>
-  </section>
-
   <!-- ===== TODAY ===== -->
-  <section id="today" class="screen">
-    <div class="topbar"><div class="logo">🌸 <b>오늘</b></div><div class="pill" id="todayDate">8월 24일 (일)</div></div>
+  <section id="today" class="screen active">
+    <div class="topbar"><div class="logo">🌸 <b>오늘</b></div><div class="pill" id="todayDate">8월 24일 (월)</div></div>
+    <p class="demoNote" style="margin:0 2px 10px">UI 데모 · 개발 전 단계 시안 (데이터 저장 없음)</p>
 
     <div class="card">
       <div class="ringRow">
@@ -237,7 +213,7 @@
   </section>
 
   <!-- ===== TABBAR ===== -->
-  <nav class="tabbar hidden" id="tabbar">
+  <nav class="tabbar" id="tabbar">
     <button class="tab on" data-s="today" onclick="go(this)"><span class="i">☀️</span>오늘</button>
     <button class="tab" data-s="month" onclick="go(this)"><span class="i">🗓️</span>월간</button>
     <button class="tab" data-s="records" onclick="go(this)"><span class="i">🗂️</span>기록</button>
@@ -246,16 +222,10 @@
 </div>
 
 <script>
-  function enterApp(){
-    document.getElementById('login').classList.remove('active');
-    document.getElementById('today').classList.add('active');
-    document.getElementById('tabbar').classList.remove('hidden');
-    updateRing();
-  }
   function go(btn){
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
     btn.classList.add('on');
-    document.querySelectorAll('.screen').forEach(s=>{ if(s.id!=='login') s.classList.remove('active'); });
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById(btn.dataset.s).classList.add('active');
   }
   function tg(el){
@@ -308,6 +278,7 @@
   function chip(el,c){document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');curChip=c;renderRec();}
   function filterRec(v){curQ=v;renderRec();}
   renderRec();
+  updateRing();
 </script>
 </body>
 </html>
